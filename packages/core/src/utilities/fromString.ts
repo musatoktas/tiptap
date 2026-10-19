@@ -4,7 +4,13 @@ export function fromString(value: any): any {
   }
 
   if (value.match(/^[+-]?(?:\d*\.)?\d+$/)) {
-    return Number(value)
+    const number = Number(value)
+
+    if (/^[+-]?\d+$/.test(value) && !Number.isSafeInteger(number)) {
+      return value
+    }
+
+    return number
   }
 
   if (value === 'true') {

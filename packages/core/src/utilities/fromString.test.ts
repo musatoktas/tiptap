@@ -27,6 +27,24 @@ describe('fromString', () => {
     expect(value).toBe(1.2)
   })
 
+  it('should keep an integer that is too big for a number', () => {
+    const value = fromString('670877319835078893569')
+
+    expect(value).toBe('670877319835078893569')
+  })
+
+  it('should keep a negative integer that is too small for a number', () => {
+    const value = fromString('-9007199254740993')
+
+    expect(value).toBe('-9007199254740993')
+  })
+
+  it('should convert the largest safe integer to a number', () => {
+    const value = fromString('9007199254740991')
+
+    expect(value).toBe(9007199254740991)
+  })
+
   it('should not convert to a number with exponent', () => {
     const value = fromString('1e1')
 
